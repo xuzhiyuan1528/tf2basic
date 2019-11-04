@@ -13,11 +13,11 @@ class ToyDataset:
         # 1 for SOS, 1 for EOS, 1 for padding
         self.char2int = {c: i+3 for i, c in enumerate(self.characters)}
 
-        self.vocab_size = len(self.characters)
         self.min_str_len = min_len
         self.max_str_len = max_len
 
         self.max_seq_len = max_len + 2
+        self.vocab_size = len(self.characters) + 3
 
     def get_dataset(self, num_samples):
         inp_set = []
@@ -45,6 +45,26 @@ class ToyDataset:
 
         return inp, tar
 
-toy = ToyDataset(5, 10)
-inp_set, tar_set = toy.get_dataset(10)
-toy.split_dataset(inp_set, tar_set, 0.2)
+    def char_index(self, char):
+        if char == self.SOS:
+            return 1
+        elif char == self.EOS:
+            return 2
+        else:
+            return self.char2int[char]
+
+    def index_char(self, index):
+        if index == 0:
+            return ":"
+        elif index == 1:
+            return self.SOS
+        elif index == 2:
+            return self.EOS
+        else:
+            return self.characters[index-3]
+
+
+if __name__ == '__main__':
+    toy = ToyDataset(5, 10)
+    inp_set, tar_set = toy.get_dataset(10)
+    input_train, input_val, target_train, target_val = toy.split_dataset(inp_set, tar_set, 0.2)

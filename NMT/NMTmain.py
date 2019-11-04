@@ -190,7 +190,7 @@ if __name__ == '__main__':
     print(path_to_file)
 
     # Try experimenting with the size of that dataset
-    num_examples = 64
+    num_examples = 30000
     input_tensor, target_tensor, inp_lang, targ_lang \
         = load_dataset(path_to_file, num_examples)
 
@@ -206,7 +206,7 @@ if __name__ == '__main__':
     """prepare for dataset##############"""
 
     BUFFER_SIZE = len(input_tensor_train)
-    BATCH_SIZE = 32
+    BATCH_SIZE = 64
     steps_per_epoch = len(input_tensor_train) // BATCH_SIZE
     embedding_dim = 256
     units = 1024
