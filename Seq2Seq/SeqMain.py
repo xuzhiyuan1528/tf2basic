@@ -216,7 +216,7 @@ def translate(sentence):
 
 
 if __name__ == '__main__':
-    train_flag = False
+    train_flag = True
     toy = ToyDataset(5, 10)
     inp_set, tar_set = toy.get_dataset(30000)
     input_train, input_eval, target_train, target_eval = toy.split_dataset(inp_set, tar_set, 0.2)
